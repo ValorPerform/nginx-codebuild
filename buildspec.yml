@@ -27,7 +27,6 @@ phases:
       - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
       - echo Build stage successfully completed on `date`
       - echo Pushing the Docker image...
-      - $(aws ecr get-login --no-include-email --region us-east-1)
       - docker push $IMAGE_URI
       - printf '[{"name":"nginx","imageUri":"%s"}]' "$IMAGE_URI" > images.json
 artifacts:
